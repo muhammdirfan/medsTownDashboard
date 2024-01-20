@@ -10,6 +10,13 @@ import {
   useSortBy,
   useTable,
 } from "react-table";
+import {
+  MdCancel,
+  MdCheckCircle,
+  MdCircle,
+  MdOutlineError,
+  MdPending,
+} from "react-icons/md";
 
 const events = [
   { id: 1, title: "Event 1", date: "2024-01-19" },
@@ -76,8 +83,21 @@ const CheckTable = (props) => {
   initialState.pageSize = 11;
 
   const handleCheck = (selected) => {
-    console.log(selected, "selected");
     setSlectedItem(selected?.id);
+  };
+
+  const formattedDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    };
+    
+    const formattedDate = new Date(dateString).toLocaleString('en-US', options);
+    return formattedDate;
   };
 
   return (
@@ -128,12 +148,12 @@ const CheckTable = (props) => {
                   >
                     {row.cells.map((cell, index) => {
                       let data = "";
-                      if (cell.column.Header === "NAME") {
+                      if (cell.column.Header === "ORDER Id") {
                         data = (
                           <div className="flex items-center gap-2">
                             <Checkbox />
                             <p className="text-sm font-bold text-navy-700 dark:text-white">
-                              {cell.value[0]}
+                              {cell.value}
                             </p>
                           </div>
                         );
@@ -146,7 +166,42 @@ const CheckTable = (props) => {
                             color="blue"
                           />
                         );
+                      } else if (cell.column.Header === "PHARMACY Id") {
+                        data = (
+                          <p className="text-sm font-bold text-navy-700 dark:text-white">
+                            {cell.value}
+                          </p>
+                        );
+                      } else if (cell.column.Header === "PRICE") {
+                        data = (
+                          <p className="text-sm font-bold text-navy-700 dark:text-white">
+                            {cell.value}
+                          </p>
+                        );
+                      }  else if (cell.column.Header === "STATUS") {
+                        data = (
+                          <div className="flex items-center gap-2">
+                            <div className={`rounded-full text-xl`}>
+                              {cell.value === "accepted" ? (
+                                <MdCheckCircle className="text-green-500" />
+                              ) : cell.value === "pending" ? (
+                                <MdPending className="text-orange-500" />
+                              ) : cell.value === "Error" ? (
+                                <MdOutlineError className="text-red-500" />
+                              ) : null}
+                            </div>
+                            <p className="text-sm font-bold text-navy-700 dark:text-white">
+                              {cell.value}
+                            </p>
+                          </div>
+                        );
                       } else if (cell.column.Header === "QUANTITY") {
+                        data = (
+                          <p className="text-sm font-bold text-navy-700 dark:text-white">
+                            {cell.value}
+                          </p>
+                        );
+                      } else if (cell.column.Header === "TOTAL PRICE") {
                         data = (
                           <p className="text-sm font-bold text-navy-700 dark:text-white">
                             {cell.value}
@@ -155,7 +210,7 @@ const CheckTable = (props) => {
                       } else if (cell.column.Header === "DATE") {
                         data = (
                           <p className="text-sm font-bold text-navy-700 dark:text-white">
-                            {cell.value}
+                            {formattedDate(cell.value)}
                           </p>
                         );
                       }
