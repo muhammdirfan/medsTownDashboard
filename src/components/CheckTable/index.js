@@ -14,15 +14,17 @@ import axios from "axios";
 import { formattedDate } from "utils";
 
 const events = [
-  { id: 1, title: "Event 1", date: "2024-01-19" },
-  { id: 2, title: "Event 2", date: "2024-01-20" },
-  { id: 3, title: "Event 3", date: "2024-01-21" },
+  { id: 1, title: "Order Time", date: "2024-01-19" },
+  { id: 2, title: "Order Accept Time Pharmacy", date: "2024-01-20" },
+  { id: 3, title: "Order Accept Time Delivery Partner", date: "2024-01-21" },
+  { id: 4, title: "Order Delivery Time", date: "2024-01-21" },
 ];
 
 const styles = {
   timeline: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: 'center',
     flexDirection: "row",
     overflowX: "auto",
     width: "100%",
@@ -34,6 +36,7 @@ const styles = {
     backgroundColor: "#e0e0e0",
     borderRadius: "8px",
     boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
+    textAlign: "center",
     marginRight: "10px",
     padding: "10px",
     minWidth: "200px",
