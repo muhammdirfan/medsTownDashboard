@@ -4,6 +4,13 @@ import CheckTable from "components/CheckTable";
 import axios from "axios";
 import { formattedDate } from "utils";
 
+const dateOptions = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
+
+
 const OpenOrders = () => {
   const [AllOrder, setOpenOrders] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
@@ -49,7 +56,7 @@ const OpenOrders = () => {
         <CheckTable
           columnsData={columnsDataCheck}
           tableData={openOrders}
-          title={formattedDate(currentDate?.updatedAt)}
+          title={formattedDate(currentDate?.updatedAt, dateOptions)}
         />
         <div className="mt-4 flex items-center justify-end gap-5">
           <p className="font-semibold">

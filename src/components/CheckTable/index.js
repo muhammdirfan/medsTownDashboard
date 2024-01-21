@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import CardMenu from "components/card/CardMenu";
 import Checkbox from "components/checkbox";
 import Card from "components/card";
-import Progress from "components/progress";
 
 import {
   useGlobalFilter,
@@ -10,13 +9,7 @@ import {
   useSortBy,
   useTable,
 } from "react-table";
-import {
-  MdCancel,
-  MdCheckCircle,
-  MdCircle,
-  MdOutlineError,
-  MdPending,
-} from "react-icons/md";
+import { MdCheckCircle, MdOutlineError, MdPending } from "react-icons/md";
 import axios from "axios";
 import { formattedDate } from "utils";
 
@@ -24,7 +17,6 @@ const events = [
   { id: 1, title: "Event 1", date: "2024-01-19" },
   { id: 2, title: "Event 2", date: "2024-01-20" },
   { id: 3, title: "Event 3", date: "2024-01-21" },
-  // Add more events as needed
 ];
 
 const styles = {
@@ -33,6 +25,7 @@ const styles = {
     justifyContent: "space-between",
     flexDirection: "row",
     overflowX: "auto",
+    width: "100%",
     whiteSpace: "nowrap",
     padding: "10px 20px",
   },
@@ -56,11 +49,18 @@ const styles = {
   },
 };
 
+const dateOptions = {
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+};
+
 const CheckTable = (props) => {
   const { columnsData, tableData, title } = props;
 
-  const [selectedItem, setSlectedItem] = useState();
+  const [selectedItem, setSelectedItem] = useState();
   const [location, setLocation] = useState("");
+  const [rowSelected, setRowSelected] = useState(false);
 
   const columns = useMemo(() => columnsData, [columnsData]);
 
@@ -87,7 +87,7 @@ const CheckTable = (props) => {
   initialState.pageSize = 11;
 
   const handleCheck = (selected) => {
-    setSlectedItem(selected?.id);
+    setSelectedItem(selected?.id);
   };
 
   useEffect(() => {
@@ -122,13 +122,68 @@ const CheckTable = (props) => {
     fetchData(order?.userLat, order?.userLng);
   }, [data]);
 
+  const handleRowSlected = (selectedRow) => {
+    setRowSelected(!rowSelected);
+    handleCheck(selectedRow);
+  };
+
+  const AdditionalRowContent = ({ data }) => {
+    return (
+      <tr className="cursor-pointer border">
+        <td colSpan={8}>
+          <div className="flex w-full items-center justify-between px-5 py-2">
+            <div>
+              <p className="py-1 text-sm font-semibold">User Name</p>
+              <p className="text-sm">username</p>
+            </div>
+            <div>
+              <p className="py-1 text-sm font-semibold">Pharmacy Name</p>
+              <p className="text-sm">pharmacy name</p>
+            </div>
+            <div>
+              <p className="py-1 text-sm font-semibold">
+                Pharmacy Phone Number
+              </p>
+              <p className="text-sm">pharmacyPhoneNumber</p>
+            </div>
+            <div>
+              <p className="py-1 text-sm font-semibold">
+                Delivery Partner Name
+              </p>
+              <p className="text-sm">deliveryPartnerName</p>
+            </div>
+            <div>
+              <p className="py-1 text-sm font-semibold">
+                Delivery Partner Location
+              </p>
+              <p className="text-sm">deliveryPartnerLocation</p>
+            </div>
+            <div>
+              <p className="py-1 text-sm font-semibold">
+                Delivery Partner Number
+              </p>
+              <p className="text-sm">deliveryPartnerNumber</p>
+            </div>
+          </div>
+          <div style={styles?.timeline}>
+            {events.map((event) => (
+              <div key={event.id} style={styles?.timelineEvent}>
+                <div style={styles?.eventDate}>{event.date}</div>
+                <div style={styles?.eventTitle}>{event.title}</div>
+              </div>
+            ))}
+          </div>
+        </td>
+      </tr>
+    );
+  };
+
   return (
     <Card extra={"w-full h-full sm:overflow-auto px-6"}>
       <header className="relative flex items-center justify-between pt-4">
         <div className="w-full text-center text-xl font-bold text-navy-700 dark:text-white">
           {title}
         </div>
-
         <CardMenu />
       </header>
 
@@ -169,15 +224,18 @@ const CheckTable = (props) => {
                     <tr
                       {...row.getRowProps()}
                       key={index}
-                      onClick={() => handleCheck(row)}
-                      className="cursor-pointer border"
+                      // onClick={() => handleCheck(row)}
+                      className="border"
                     >
                       {row.cells.map((cell, index) => {
                         let data = "";
                         if (cell.column.Header === "ORDER Id") {
                           data = (
                             <div className="flex items-center gap-2">
-                              <Checkbox />
+                              <Checkbox
+                                value={rowSelected}
+                                handleChange={() => handleRowSlected(row)}
+                              />
                               <p className="text-sm font-bold text-navy-700 dark:text-white">
                                 {cell.value}
                               </p>
@@ -283,7 +341,7 @@ const CheckTable = (props) => {
                         } else if (cell.column.Header === "DATE") {
                           data = (
                             <p className="text-sm font-bold text-navy-700 dark:text-white">
-                              {formattedDate(cell.value)}
+                              {formattedDate(cell.value, dateOptions)}
                             </p>
                           );
                         }
@@ -299,19 +357,11 @@ const CheckTable = (props) => {
                         );
                       })}
                     </tr>
-                    {selectedItem === row?.id ? (
-                      <tr className="w-full border">
-                        <div style={styles?.timeline}>
-                          {events.map((event) => (
-                            <div key={event.id} style={styles?.timelineEvent}>
-                              <div style={styles?.eventDate}>{event.date}</div>
-                              <div style={styles?.eventTitle}>
-                                {event.title}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </tr>
+                    {selectedItem === row?.id && rowSelected ? (
+                      <AdditionalRowContent
+                        key={`additionalRow_${row?.id}`}
+                        data={row.original}
+                      />
                     ) : null}
                   </>
                 );
