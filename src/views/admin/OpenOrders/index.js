@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { columnsDataCheck } from "./variables/columnsData";
 import CheckTable from "components/CheckTable";
 import axios from "axios";
+import { formattedDate } from "utils";
 
-const AllOrders = () => {
-  const [AllOrder, setAllOrders] = useState([]);
+const OpenOrders = () => {
+  const [AllOrder, setOpenOrders] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +19,7 @@ const AllOrders = () => {
       .get(`https://api.medstown.com/customer/getorders/${page}`)
       .then((res) => {
         setLoading(false);
-        setAllOrders(res.data.reverse());
+        setOpenOrders(res.data.reverse());
       })
       .catch((err) => {
         console.log(err);
@@ -32,18 +33,23 @@ const AllOrders = () => {
         getallpharmacies(pageNumber);
       }
     } else {
-      setPageNumber(pageNumber + 1);
-      getallpharmacies(pageNumber);
+      if(AllOrder?.length) {
+        setPageNumber(pageNumber + 1);
+        getallpharmacies(pageNumber);
+      }
     }
   };
+
+  const currentDate = AllOrder?.find((item) => item?.updatedAt);
+  const openOrders = AllOrder.filter(order => order.status === "pending");
 
   return (
     <div className="mt-8">
       <div>
         <CheckTable
           columnsData={columnsDataCheck}
-          tableData={AllOrder}
-          title="Orders"
+          tableData={openOrders}
+          title={formattedDate(currentDate?.updatedAt)}
         />
         <div className="mt-4 flex items-center justify-end gap-5">
           <p className="font-semibold">
@@ -69,4 +75,4 @@ const AllOrders = () => {
   );
 };
 
-export default AllOrders;
+export default OpenOrders;

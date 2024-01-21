@@ -17,7 +17,8 @@ import Category from "views/admin/Category/Category";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import Subcat from "views/admin/Category/Subcat";
 import Delivery from "views/admin/SaleForce/Delivery";
-import AllOrders from "views/admin/AllOrders";
+import OpenOrders from "views/admin/OpenOrders";
+import OrderHistory from "views/admin/OrderHistory";
 
 const routes = [
   {
@@ -42,18 +43,25 @@ const routes = [
     component: <SaleForce />,
   },
   {
-    name: "Delivery Boys", //"SaleForce
+    name: "Delivery Boys", //"Delivery
     layout: "/admin",
     path: "delivery",
     icon: <MdOutlinePedalBike className="h-6 w-6" />,
     component: <Delivery />,
   },
   {
-    name: "All Orders", //"SaleForce
+    name: "Open Orders", //"OpenOrders
     layout: "/admin",
-    path: "orders",
+    path: "open-orders",
     icon: <MdOutlineDepartureBoard className="h-6 w-6" />,
-    component: <AllOrders />,
+    component: <OpenOrders />,
+  },
+  {
+    name: "Orders History", //"OrderHistory
+    layout: "/admin",
+    path: "orders-history",
+    icon: <MdOutlineDepartureBoard className="h-6 w-6" />,
+    component: <OrderHistory />,
   },
   {
     name: "Catories", //"SaleForce
