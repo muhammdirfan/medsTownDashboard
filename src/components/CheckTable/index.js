@@ -46,11 +46,11 @@ const styles = {
   },
 
   eventDate: {
-    fontWeight: "bold",
     marginBottom: "5px",
   },
-
+  
   eventTitle: {
+    fontWeight: "bold",
     fontSize: "14px",
   },
 };
