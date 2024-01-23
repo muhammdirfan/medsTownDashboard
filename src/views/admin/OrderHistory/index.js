@@ -37,7 +37,9 @@ const OrderHistory = () => {
     }
   };
 
-  const acceptedOrders = AllOrder.filter(order => order.status === "accepted");
+  const acceptedOrders = AllOrder.filter(
+    (order) => order.status === "accepted"
+  );
 
   return (
     <div className="mt-8">

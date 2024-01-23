@@ -10,7 +10,6 @@ const dateOptions = {
   day: "numeric",
 };
 
-
 const OpenOrders = () => {
   const [AllOrder, setOpenOrders] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
@@ -40,7 +39,7 @@ const OpenOrders = () => {
         getallpharmacies(pageNumber);
       }
     } else {
-      if(AllOrder?.length) {
+      if (AllOrder?.length) {
         setPageNumber(pageNumber + 1);
         getallpharmacies(pageNumber);
       }
@@ -48,10 +47,10 @@ const OpenOrders = () => {
   };
 
   const currentDate = AllOrder?.find((item) => item?.updatedAt);
-  const openOrders = AllOrder.filter(order => order.status === "pending");
+  const openOrders = AllOrder.filter((order) => order.status === "pending");
 
   return (
-    <div className="mt-8">
+    <div className="bgpr mt-8">
       <div>
         <CheckTable
           columnsData={columnsDataCheck}
