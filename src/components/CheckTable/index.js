@@ -34,15 +34,14 @@ const styles = {
   },
 
   timelineEvent: {
-    backgroundColor: "#52c41a",
+    backgroundColor: "#014d4d",
     color: "white",
     borderRadius: "8px",
     boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
     textAlign: "center",
-    // marginRight: "20px",
     padding: "10px",
     minWidth: "200px",
-    marginTop: "8px",
+    margin: "10px 0",
   },
 
   eventDate: {
@@ -174,7 +173,7 @@ const CheckTable = (props) => {
           <div className="bg-gray-50" style={styles?.timeline}>
             {events.map((event, index) => (
               <React.Fragment key={event.id}>
-                <div className="bg-red-300" style={styles?.timelineEvent}>
+                <div style={styles?.timelineEvent}>
                   <div className="card" style={styles?.eventDate}>
                     {event.date}
                   </div>
@@ -183,7 +182,7 @@ const CheckTable = (props) => {
                 {index !== events.length - 1 && (
                   <hr
                     className="relative z-10 h-1 w-32"
-                    style={{ background: "#52c41a" }}
+                    style={{ background: "#014d4d" }}
                   />
                 )}
               </React.Fragment>
