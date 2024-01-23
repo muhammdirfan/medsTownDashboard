@@ -35,7 +35,7 @@ const style1 = {
   overflowY: "scroll",
 };
 
-const SaleForce = () => {
+const Pharmacy = () => {
   const [data, setData] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [fullName, setFullName] = useState("");
@@ -163,39 +163,61 @@ const SaleForce = () => {
     <div>
       <div className="bg mt-5 grid h-full grid-cols-1 gap-5 md:grid-cols-1">
         <DataGrid
+          disableColumn
+          disableDensitySelector
+          disableColumnFilter
+          disableColumnSelector
+          disableSelectionOnClick
+          disableColumnMenu
           rows={data}
           columns={[
-            { field: "bussinessName", headerName: "Name", width: 200 },
-            { field: "businessPhone", headerName: "Phone", width: 200 },
-            { field: "fullName", headerName: "Owner Name", width: 200 },
-            { field: "address", headerName: "Address", width: 200 },
-            { field: "ownerPhone", headerName: "Owner Phone", width: 200 },
-            { field: "email", headerName: "Email", width: 200 },
             {
-              field: "dateOfRegistration",
-              headerName: "Date Of Registration",
+              field: "Payment identifier",
+              headerName: "Payment identifier",
+              width: 200,
+            },
+            { field: "Amount", headerName: "Amount", width: 200 },
+            { field: "Value Date", headerName: "Value Date", width: 200 },
+            {
+              field: "Beneficiary Name",
+              headerName: "Beneficiary Name",
               width: 200,
             },
             {
-              field: "dateOfMedicalLicense",
-              headerName: "Date Of Medical License",
+              field: "Bene Account Number",
+              headerName: "Bene Account Number",
               width: 200,
             },
             {
-              field: "bussinessRegNo",
-              headerName: "Bussiness Reg No",
+              field: "Email ID of beneficiary",
+              headerName: "Email ID of beneficiary",
               width: 200,
             },
-            { field: "gstNo", headerName: "GST No", width: 200 },
             {
-              field: "medicalLicenseNo",
-              headerName: "Medical License No",
+              field: "Email Body",
+              headerName: "Email Body",
               width: 200,
             },
-            { field: "pincode", headerName: "Pincode", width: 200 },
             {
-              field: "businessTiming",
-              headerName: "Business Timing",
+              field: "Debit Account Number",
+              headerName: "Debit Account Number",
+              width: 200,
+            },
+            {
+              field: "CRN (Narration  / Remarks)",
+              headerName: "CRN (Narration  / Remarks)",
+              width: 200,
+            },
+            { field: "Receiver IFSC", headerName: "Receiver IFSC", width: 200 },
+
+            {
+              field: "Receiver A/c type",
+              headerName: "Receiver A/c type",
+              width: 200,
+            },
+            {
+              field: "Remarks (Beneficiary Account Stmt narration)",
+              headerName: "Remarks (Beneficiary Account Stmt narration)",
               width: 200,
               renderCell: (params) => (
                 <div className="flex items-center">
@@ -208,40 +230,42 @@ const SaleForce = () => {
                 </div>
               ),
             },
-            {
-              field: "location",
-              headerName: "Location",
-              width: 200,
-              renderCell: (params) => (
-                <div className="flex items-center">
-                  <FiExternalLink
-                    size={24}
-                    className="cursor-pointer"
-                    onClick={() =>
-                      window.open(
-                        `https://www.google.com/maps/search/?api=1&query=${params.row.address}${params.row.pincode}`
-                      )
-                    }
-                  />
-                </div>
-              ),
-            },
+            // {
+            //   field: "location",
+            //   headerName: "Location",
+            //   width: 200,
+            //   renderCell: (params) => (
+            //     <div className="flex items-center">
+            //       <FiExternalLink
+            //         size={24}
+            //         className="cursor-pointer"
+            //         onClick={() =>
+            //           window.open(
+            //             `https://www.google.com/maps/search/?api=1&query=${params.row.address}${params.row.pincode}`
+            //           )
+            //         }
+            //       />
+            //     </div>
+            //   ),
+            // },
             {
               field: "Action",
               headerName: "Action",
               width: 200,
               renderCell: (params) => (
                 <div className="flex items-center">
-                  <BiPencil
+                  <p>Hold</p>
+                  {/* <BiPencil
                     size={18}
                     onClick={() => EditPharmacy(params)}
                     className="mr-7 cursor-pointer hover:text-blue-500"
-                  />
-                  <AiFillDelete
+                  /> */}
+                  <p className=" pr-3 pl-2">Accept</p>
+                  {/* <AiFillDelete
                     size={18}
                     onClick={() => handelDeleteOpen(params)}
                     className="mr-7 cursor-pointer hover:text-red-500"
-                  />
+                  /> */}
                   {/* <AiFillEye size={18} className="cursor-pointer" onClick={()=>window.open(`https://www.google.com/maps/search/?api=1&query=${params.row.address}${params.row.pincode}`)} /> */}
                 </div>
               ),
@@ -394,4 +418,4 @@ const SaleForce = () => {
   );
 };
 
-export default SaleForce;
+export default Pharmacy;

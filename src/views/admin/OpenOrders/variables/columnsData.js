@@ -1,4 +1,3 @@
-
 export const columnsDataCheck = [
   {
     Header: "ORDER Id",
@@ -48,6 +47,6 @@ export const columnsDataCheck = [
   {
     Header: "DATE",
     accessor: "updatedAt",
-    width: 100
+    width: 100,
   },
 ];

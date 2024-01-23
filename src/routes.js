@@ -7,7 +7,7 @@ import {
   MdStore,
   MdCategory,
   MdOutlinePedalBike,
-  MdOutlineDepartureBoard
+  MdOutlineDepartureBoard,
 } from "react-icons/md";
 
 import Dashboard from "views/admin/Dashboard/Dashboard";
@@ -19,6 +19,7 @@ import Subcat from "views/admin/Category/Subcat";
 import Delivery from "views/admin/SaleForce/Delivery";
 import OpenOrders from "views/admin/OpenOrders";
 import OrderHistory from "views/admin/OrderHistory";
+import Pharmacy from "views/admin/Pharmacy";
 
 const routes = [
   {
@@ -63,6 +64,15 @@ const routes = [
     icon: <MdOutlineDepartureBoard className="h-6 w-6" />,
     component: <OrderHistory />,
   },
+
+  {
+    name: "Pharmacy", //"OrderHistory
+    layout: "/admin",
+    path: "pharmacy",
+    icon: <MdOutlineDepartureBoard className="h-6 w-6" />,
+    component: <Pharmacy />,
+  },
+
   {
     name: "Catories", //"SaleForce
     layout: "/admin",
