@@ -15,10 +15,10 @@ import { formattedDate } from "utils";
 
 // time
 const events = [
-  { id: 1, title: "Order Placed", date: "2024-01-19" },
-  { id: 2, title: "Order Accept Time Pharmacy", date: "2024-01-20" },
-  { id: 3, title: "Order Accept Time Delivery Partner", date: "2024-01-21" },
-  { id: 4, title: "Order Delivery Time", date: "2024-01-21" },
+  { id: 1, title: "Order Placed", date: "10:19 PM" },
+  { id: 2, title: "Order Accept Time Pharmacy", date: "12:00 AM" },
+  { id: 3, title: "Order Accept Time Delivery Partner", date: "2:00 AM" },
+  { id: 4, title: "Order Delivery Time", date: "5:20 AM" },
 ];
 
 const styles = {
@@ -39,7 +39,7 @@ const styles = {
     borderRadius: "8px",
     boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
     textAlign: "center",
-    marginRight: "20px",
+    // marginRight: "20px",
     padding: "10px",
     minWidth: "200px",
     marginTop: "8px",
@@ -171,21 +171,22 @@ const CheckTable = (props) => {
               <p className="text-sm">deliveryPartnerNumber</p>
             </div>
           </div>
-          <div className=" bg-gray-50" style={styles?.timeline}>
-            {events.map((event) => (
-              <>
-                <div
-                  key={event.id}
-                  className=" bg-red-300"
-                  style={styles?.timelineEvent}
-                >
+          <div className="bg-gray-50" style={styles?.timeline}>
+            {events.map((event, index) => (
+              <React.Fragment key={event.id}>
+                <div className="bg-red-300" style={styles?.timelineEvent}>
                   <div className="card" style={styles?.eventDate}>
                     {event.date}
                   </div>
                   <div style={styles?.eventTitle}>{event.title}</div>
                 </div>
-                {/* <hr className=" h-1 w-36" style={{ background: "#f5f8fe" }} /> */}
-              </>
+                {index !== events.length - 1 && (
+                  <hr
+                    className="relative z-10 h-1 w-32"
+                    style={{ background: "#52c41a" }}
+                  />
+                )}
+              </React.Fragment>
             ))}
           </div>
         </td>
@@ -306,7 +307,7 @@ const CheckTable = (props) => {
                             </div>
                           );
                         } else if (
-                          cell.column.Header === "DELIVERY PARTNER NAME"
+                          cell.column.Header === "DELIVERY nPARTNER NAME"
                         ) {
                           data = (
                             <p className="text-sm font-bold text-navy-700 dark:text-white">
