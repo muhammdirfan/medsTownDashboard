@@ -13,8 +13,9 @@ import { MdCheckCircle, MdOutlineError, MdPending } from "react-icons/md";
 import axios from "axios";
 import { formattedDate } from "utils";
 
+// time
 const events = [
-  { id: 1, title: "Order Time", date: "2024-01-19" },
+  { id: 1, title: "Order Placed", date: "2024-01-19" },
   { id: 2, title: "Order Accept Time Pharmacy", date: "2024-01-20" },
   { id: 3, title: "Order Accept Time Delivery Partner", date: "2024-01-21" },
   { id: 4, title: "Order Delivery Time", date: "2024-01-21" },
@@ -23,8 +24,8 @@ const events = [
 const styles = {
   timeline: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     flexDirection: "row",
     overflowX: "auto",
     width: "100%",
@@ -33,13 +34,15 @@ const styles = {
   },
 
   timelineEvent: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#52c41a",
+    color: "white",
     borderRadius: "8px",
     boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
     textAlign: "center",
-    marginRight: "10px",
+    marginRight: "20px",
     padding: "10px",
     minWidth: "200px",
+    marginTop: "8px",
   },
 
   eventDate: {
@@ -168,12 +171,21 @@ const CheckTable = (props) => {
               <p className="text-sm">deliveryPartnerNumber</p>
             </div>
           </div>
-          <div style={styles?.timeline}>
+          <div className=" bg-gray-50" style={styles?.timeline}>
             {events.map((event) => (
-              <div key={event.id} style={styles?.timelineEvent}>
-                <div style={styles?.eventDate}>{event.date}</div>
-                <div style={styles?.eventTitle}>{event.title}</div>
-              </div>
+              <>
+                <div
+                  key={event.id}
+                  className=" bg-red-300"
+                  style={styles?.timelineEvent}
+                >
+                  <div className="card" style={styles?.eventDate}>
+                    {event.date}
+                  </div>
+                  <div style={styles?.eventTitle}>{event.title}</div>
+                </div>
+                {/* <hr className=" h-1 w-36" style={{ background: "#f5f8fe" }} /> */}
+              </>
             ))}
           </div>
         </td>
@@ -337,7 +349,7 @@ const CheckTable = (props) => {
                           );
                         } else if (cell.column.Header === "TOTAL PRICE") {
                           data = (
-                            <p className="text-sm font-bold text-navy-700 dark:text-white">
+                            <p className="bg-red-200 text-sm font-bold text-navy-700 dark:text-white">
                               {cell.value}
                             </p>
                           );
@@ -353,7 +365,9 @@ const CheckTable = (props) => {
                             {...cell.getCellProps()}
                             key={index}
                             className="px-2 pt-[14px] pb-[16px] sm:text-[14px]"
-                            style={{ width: `${cell.column.width}px` }}
+                            style={{
+                              width: `${cell.column.width}px`,
+                            }}
                           >
                             {data}
                           </td>
