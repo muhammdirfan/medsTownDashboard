@@ -7,7 +7,8 @@ import {
   MdStore,
   MdCategory,
   MdOutlinePedalBike,
-  MdOutlineDepartureBoard
+  MdOutlineDepartureBoard,
+  MdOutlineShoppingBasket
 } from "react-icons/md";
 
 import Dashboard from "views/admin/Dashboard/Dashboard";
@@ -19,6 +20,7 @@ import Subcat from "views/admin/Category/Subcat";
 import Delivery from "views/admin/SaleForce/Delivery";
 import OpenOrders from "views/admin/OpenOrders";
 import OrderHistory from "views/admin/OrderHistory";
+import Sales from "views/admin/Sales";
 
 const routes = [
   {
@@ -62,6 +64,13 @@ const routes = [
     path: "orders-history",
     icon: <MdOutlineDepartureBoard className="h-6 w-6" />,
     component: <OrderHistory />,
+  },
+  {
+    name: "Sales", //"OrderHistory
+    layout: "/admin",
+    path: "sales",
+    icon: <MdOutlineShoppingBasket className="h-6 w-6" />,
+    component: <Sales />,
   },
   {
     name: "Catories", //"SaleForce
