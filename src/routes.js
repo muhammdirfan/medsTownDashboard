@@ -26,6 +26,7 @@ import UserDetails from "views/admin/UserDetails";
 import PharmacyDetails from "views/admin/PharmacyDetails";
 import DeliveryPartnerDetails from "views/admin/DeliveryPartnerDetails";
 import WalletDetails from "views/admin/WalletDetails";
+import PharmacyPayoutReq from "views/admin/PharmacyPayoutReq";
 
 const routes = [
   {
@@ -69,6 +70,13 @@ const routes = [
     path: "orders-history",
     icon: <MdOutlineDepartureBoard className="h-6 w-6" />,
     component: <OrderHistory />,
+  },
+  {
+    name: "Pharmacy Payout Req", //"OrderHistory
+    layout: "/admin",
+    path: "pharmacy-payout-req",
+    icon: <MdOutlineDepartureBoard className="h-6 w-6" />,
+    component: <PharmacyPayoutReq />,
   },
   {
     name: "Sales", //"Sales
