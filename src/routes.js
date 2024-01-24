@@ -22,6 +22,7 @@ import OpenOrders from "views/admin/OpenOrders";
 import OrderHistory from "views/admin/OrderHistory";
 import Sales from "views/admin/Sales";
 import UserDetails from "views/admin/UserDetails";
+import PharmacyDetails from "views/admin/PharmacyDetails";
 
 const routes = [
   {
@@ -79,6 +80,13 @@ const routes = [
     path: "user-details",
     icon: <MdOutlineShoppingBasket className="h-6 w-6" />,
     component: <UserDetails />,
+  },
+  {
+    name: "Pharmacy Details", //"PharmacyDetails
+    layout: "/admin",
+    path: "pharmacy-details",
+    icon: <MdStore className="h-6 w-6" />,
+    component: <PharmacyDetails />,
   },
   {
     name: "Catories", //"SaleForce
