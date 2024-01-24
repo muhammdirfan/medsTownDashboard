@@ -9,6 +9,7 @@ import {
   MdOutlinePedalBike,
   MdOutlineDepartureBoard,
   MdOutlineShoppingBasket,
+  MdOutlineWallpaper,
 } from "react-icons/md";
 
 import Dashboard from "views/admin/Dashboard/Dashboard";
@@ -23,6 +24,8 @@ import OrderHistory from "views/admin/OrderHistory";
 import Sales from "views/admin/Sales";
 import UserDetails from "views/admin/UserDetails";
 import PharmacyDetails from "views/admin/PharmacyDetails";
+import DeliveryPartnerDetails from "views/admin/DeliveryPartnerDetails";
+import WalletDetails from "views/admin/WalletDetails";
 
 const routes = [
   {
@@ -87,6 +90,20 @@ const routes = [
     path: "pharmacy-details",
     icon: <MdStore className="h-6 w-6" />,
     component: <PharmacyDetails />,
+  },
+  {
+    name: "Delivery Partner Details", //"DeliveryPartnerDetails
+    layout: "/admin",
+    path: "delivery-partner-details",
+    icon: <MdOutlinePedalBike className="h-6 w-6" />,
+    component: <DeliveryPartnerDetails />,
+  },
+  {
+    name: "Wallet Details", //"WalletDetails
+    layout: "/admin",
+    path: "wallet-details",
+    icon: <MdOutlineWallpaper className="h-6 w-6" />,
+    component: <WalletDetails />,
   },
   {
     name: "Catories", //"SaleForce
