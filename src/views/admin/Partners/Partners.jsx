@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Modal from "@mui/material/Modal";
+import { TextField } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -30,6 +31,20 @@ const Partners = () => {
   const [hundreds, setHundreds] = useState(100);
   const [open, setOpen] = React.useState(false);
   const [modalData, setModalData] = useState({});
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearchTextChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const filteredRows = data.filter((row) =>
+    Object.values(row).some(
+      (value) =>
+        value &&
+        value.toString().toLowerCase().includes(searchText.toLowerCase())
+    )
+  );
+
   const handleClose = () => setOpen(false);
   useEffect(() => {
     const obj = {
@@ -78,8 +93,15 @@ const Partners = () => {
   return (
     <div>
       <div className="mt-5 grid h-full grid-cols-1 gap-5 md:grid-cols-1">
+        <TextField
+          label="Search"
+          variant="outlined"
+          fullWidth
+          value={searchText}
+          onChange={handleSearchTextChange}
+        />
         <DataGrid
-          rows={data}
+          rows={filteredRows}
           columns={[
             { field: "medicineName", headerName: "Medicine Name", width: 200 },
             {
@@ -169,15 +191,43 @@ const Partners = () => {
             </Swiper>
             <div className="w-1/2">
               <h4 className="text-xl font-bold">{modalData.medicineName}</h4>
-              <div className="flex gap-5 mt-20">
+              <div className="mt-20 flex gap-5">
                 <div>
-                  <p className="text-xl">Company Name : <span className="font-bold">{modalData.medicineCompany}</span></p>
-                  <p className="text-xl">Price : <span className="font-bold">₹ {modalData.medicinePrice}</span></p>
-                  <p className="text-xl">Category :<span className="font-bold">{modalData.disease}</span> </p>
-                  <p className="text-xl">Rx Required : <span className="font-bold">{modalData.rxRequired === true ? "Yes" : "No"}</span></p>
-                  <p className="text-xl">Type : <span className="font-bold">{modalData.type}</span></p>
-                 {modalData.description && modalData.description.length > 0 && <p className="text-xl">Description : <span className="font-bold">{modalData.description}</span></p>}
-                  </div>
+                  <p className="text-xl">
+                    Company Name :{" "}
+                    <span className="font-bold">
+                      {modalData.medicineCompany}
+                    </span>
+                  </p>
+                  <p className="text-xl">
+                    Price :{" "}
+                    <span className="font-bold">
+                      ₹ {modalData.medicinePrice}
+                    </span>
+                  </p>
+                  <p className="text-xl">
+                    Category :
+                    <span className="font-bold">{modalData.disease}</span>{" "}
+                  </p>
+                  <p className="text-xl">
+                    Rx Required :{" "}
+                    <span className="font-bold">
+                      {modalData.rxRequired === true ? "Yes" : "No"}
+                    </span>
+                  </p>
+                  <p className="text-xl">
+                    Type : <span className="font-bold">{modalData.type}</span>
+                  </p>
+                  {modalData.description &&
+                    modalData.description.length > 0 && (
+                      <p className="text-xl">
+                        Description :{" "}
+                        <span className="font-bold">
+                          {modalData.description}
+                        </span>
+                      </p>
+                    )}
+                </div>
               </div>
             </div>
           </div>
