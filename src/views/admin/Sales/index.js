@@ -35,6 +35,7 @@ const Sales = () => {
           pageSize={5}
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
+          disableColumnFilter
           sx={{ width: "100%" }}
           getRowId={(row) => row._id}
           //   onRowClick={(row) => {

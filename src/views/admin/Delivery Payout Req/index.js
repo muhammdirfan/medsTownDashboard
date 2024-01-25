@@ -35,6 +35,7 @@ const DeliveryPayoutReq = () => {
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
           disableColumnSelector
+          disableColumnFilter
           sx={{ width: "100%" }}
           getRowId={(row) => row._id}
           // filterModel={filterModel}

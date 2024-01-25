@@ -35,6 +35,7 @@ const PharmacyPayoutReq = () => {
           rowsPerPageOptions={[5]}
           disableSelectionOnClick
           disableColumnSelector
+          disableColumnFilter
           sx={{ width: "100%" }}
           getRowId={(row) => row._id}
           components={{
