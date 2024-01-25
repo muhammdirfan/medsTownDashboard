@@ -39,7 +39,7 @@ export const tableData = [
     _id: "63c3c2a266cf04998f995657",
     ItemsOrdered: 4,
     orderId: "MED38261802",
-    totalOrderPrice: "1",
+    totalOrderPrice: "12",
     medicineQuantity: null,
     medicineType: null,
     paymentMode: "Paypal",
@@ -49,12 +49,12 @@ export const tableData = [
   {
     _id: "63c3c2a266cf04998f347657",
     ItemsOrdered: 4,
-    orderId: "MED38261802",
+    orderId: "MD38261801",
     totalOrderPrice: "10",
     medicineQuantity: null,
     medicineType: null,
     paymentMode: "Paypal",
     paymentStatus: "paid",
-    orderNumber: 3422,
+    orderNumber: 1423,
   },
 ];
